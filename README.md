@@ -1,6 +1,11 @@
-test
-tl;dr - Given heavy Javascript apps which people keep open for hours (or days) at a time, how do you deploy
+# Premis
+
+## tl;dr
+
+Given heavy Javascript apps which people keep open for hours (or days) at a time, how do you deploy
 multiple times a day without screwing the user over or making the developer's life really hard? Discuss!
+
+## In more detail
 
 Reliable continuous deployment for stateless web applications can be done reasonably easily. For example:
 
@@ -22,3 +27,29 @@ quite hard on developers, and doesn't help solve the fact that you want to be ab
 multiple times a day also.
 
 Lets discuss application architecture strategies for solving this, and the inherent tradeoffs involved in each.
+
+# Prior art
+
+Require.js
+
+DB migration patterns
+
+# Application useage scenarios
+
+Facebook
+
+Google docs
+
+Other - streaming etc
+
+Event sourcing apps
+
+# Problems
+
+CSS reloading
+
+Javascript reloading
+
+Upgrading local storage
+
+
