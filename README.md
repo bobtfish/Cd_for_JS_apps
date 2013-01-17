@@ -47,6 +47,20 @@ You can make the front => backend application API be compatible at all times
 This introduces a non-trivial development requirement, and a non-trivial
 testing / continuous integration required.
 
+# Prior art
+
+## Code loading
+
+Require.js etc - there are whole hosts of libraries to help you load Javascript libraries dynamically
+and do the path prefix per version thing etc, however there isn't any (known to me) prior art to help
+with upgrading whilst not reloading
+
+## DB migration / API versioning patterns
+
+Some of these problems can be solved in the same ways as DB migrations, and or API versioning - which
+work well, however these all impose non-trivial to implement at all times, and very non-trivial to
+prove in CI or get right at all times.
+
 # Common patterns for fixing these issues
 
 ## Facebook
@@ -59,17 +73,13 @@ the entire page regularly, avoiding this issue.
 Persists the entire client side state to the server. Causes force reload on server side
 code upgrade.
 
+## Not good enough?
 
-## Other - streaming etc
+It feels like there must be a better way to do things than this - or at least we're missing
+well known writeups about why this is hard / what the various tradeoffs are...
 
-## Event sourcing apps
-
-# Prior art
-
-Require.js
-
-DB migration patterns
-
+Seems to me to be worth spiking some solutions to these, just to prove out what is or isn't
+easily possible.
 
 # Problems
 
