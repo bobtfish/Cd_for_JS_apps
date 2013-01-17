@@ -47,17 +47,22 @@ You can make the front => backend application API be compatible at all times
 This introduces a non-trivial development requirement, and a non-trivial
 testing / continuous integration required.
 
-# Application useage scenarios
+# Common patterns for fixing these issues
 
 ## Facebook
 
-People are entering short(ish) text strings as user input, and there
+People are entering short(ish) text strings as user input, and so it just reloads
+the entire page regularly, avoiding this issue.
 
-Google docs
+## Google docs
 
-Other - streaming etc
+Persists the entire client side state to the server. Causes force reload on server side
+code upgrade.
 
-Event sourcing apps
+
+## Other - streaming etc
+
+## Event sourcing apps
 
 # Prior art
 
@@ -84,8 +89,23 @@ There are a whole class of cases where this strategy won't work unless you're
 also regenerating all of the generated markup for your application to include
 new classes / ids etc.
 
-Javascript reloading
+## Upgrading local storage
 
-Upgrading local storage
+If you're using client side local storage, then new application versions can
+imply that you need a new data schema for local storage. In the minimal case where
+you are using local storage as a cache, you can avoid this by just embedding a version number
+and flushing the storage on upgrade. However in some applications this
+can be much too slow (or much too costly to consumers, for mobile apps!)
+
+Other approaches would be to use a rails DB migration like strategy, so
+that when you reload your application model from local storage, you upgrade all of the
+objects at that point (by having specific upgrade javascript code).
+
+## Javascript reloading
+
+This one is the real issue - whilst Javascript is highly dynamic, just replacing all the
+modules in your app in place is unlikely to work. Other solutions such as loading everything
+as new classes and transitioning over _should_ be theoretically possible, however this causes issues
+with memory leakage as Javascript isn't (I believe) unloadable.
 
 
